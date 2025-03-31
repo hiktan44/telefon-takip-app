@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ phone.model }} - Telefon Takip</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #2c3e50;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: white;
+        }
+        .section-title {
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        .phone-details {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .phone-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .specs-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .specs-list li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+        .specs-icon {
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+            color: #3498db;
+        }
+        .price-history-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        .price-history-table {
+            margin-bottom: 0;
+        }
+        .price-history-table th, 
+        .price-history-table td {
+            padding: 12px 15px;
+        }
+        .source-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-mobile-alt me-2"></i>
+                Telefon Takip ve Karşılaştırma
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reference">Referans Telefon Ekle</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ phone.model }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Telefon Detayları -->
+            <div class="col-md-4">
+                <div class="phone-details">
+                    <img src="https://via.placeholder.com/400x600?text={{ phone.model }}" alt="{{ phone.model }}" class="phone-image">
+                    <div class="p-4">
+                        <h2>{{ phone.model }}</h2>
+                        <p class="price">{{ phone.price }} TL</p>
+                        <p class="text-muted mb-4">Son güncelleme: {{ phone.date_added }}</p>
+                        
+                        <h5 class="mb-3">Teknik Özellikler</h5>
+                        <ul class="specs-list">
+                            {% if phone.specs.screen %}
+                            <li><i class="fas fa-mobile-screen specs-icon"></i> <strong>Ekran:</strong> {{ phone.specs.screen }}</li>
+                            {% endif %}
+                            
+                            {% if phone.specs.processor %}
+                            <li><i class="fas fa-microchip specs-icon"></i> <strong>İşlemci:</strong> {{ phone.specs.processor }}</li>
+                            {% endif %}
+                            
+                            {% if phone.specs.ram %}
+                            <li><i class="fas fa-memory specs-icon"></i> <strong>RAM:</strong> {{ phone.specs.ram }}</li>
+                            {% endif %}
+                            
+                            {% if phone.specs.storage %}
+                            <li><i class="fas fa-hdd specs-icon"></i> <strong>Depolama:</strong> {{ phone.specs.storage }}</li>
+                            {% endif %}
+                            
+                            <li><i class="fas fa-shopping-cart specs-icon"></i> <strong>Satış Kanalı:</strong> {{ phone.source }}</li>
+                        </ul>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-primary" onclick="addToCompare({{ phone.id }}, '{{ phone.model }}')">
+                                <i class="fas fa-balance-scale me-2"></i>Karşılaştırmaya Ekle
+                            </button>
+                            <a href="/" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Geri Dön
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fiyat Grafiği -->
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-line me-2"></i>Fiyat Geçmişi
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="priceChart" height="300"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Fiyat Geçmişi Tablosu -->
+                <div class="price-history-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-history me-2"></i>Fiyat Değişimleri
+                        </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table price-history-table">
+                            <thead>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>Fiyat</th>
+                                    <th>Kaynak</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if price_history %}
+                                    {% for item in price_history %}
+                                    <tr>
+                                        <td>{{ item.date }}</td>
+                                        <td>{{ item.price }} TL</td>
+                                        <td>
+                                            <span class="badge bg-info source-badge">{{ item.source }}</span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="3" class="text-center py-4">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            Fiyat geçmişi bulunamadı.
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-3 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">© 2024 Telefon Takip ve Karşılaştırma. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // Karşılaştırmaya ekle fonksiyonu
+        function addToCompare(id, model) {
+            // Local storage'dan mevcut telefon listesini al
+            let selectedPhones = JSON.parse(localStorage.getItem('selectedPhones')) || [];
+            
+            // Eğer bu telefon zaten eklenmişse çıkar
+            if (selectedPhones.find(p => p.id === id)) {
+                selectedPhones = selectedPhones.filter(p => p.id !== id);
+                alert(`${model} karşılaştırma listesinden çıkarıldı`);
+            } else {
+                // En fazla 3 telefon karşılaştırılabilir
+                if (selectedPhones.length >= 3) {
+                    alert('En fazla 3 telefon karşılaştırabilirsiniz');
+                    return;
+                }
+                
+                // Telefonu ekle
+                selectedPhones.push({ id, model });
+                alert(`${model} karşılaştırma listesine eklendi`);
+            }
+            
+            // Güncel listeyi kaydet
+            localStorage.setItem('selectedPhones', JSON.stringify(selectedPhones));
+        }
+        
+        // Fiyat grafiği
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            
+            // Fiyat geçmişi verilerini al
+            {% if price_history %}
+            const priceData = [
+                {% for item in price_history %}
+                {
+                    date: "{{ item.date }}",
+                    price: {{ item.price }},
+                    source: "{{ item.source }}"
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+            
+            // Tarihleri ve fiyatları ayır
+            const dates = priceData.map(item => item.date);
+            const prices = priceData.map(item => item.price);
+            
+            // Grafik oluştur
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Fiyat (TL)',
+                        data: prices,
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#3498db',
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' TL';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Fiyat (TL)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tarih'
+                            }
+                        }
+                    }
+                }
+            });
+            {% else %}
+            // Veri yoksa boş grafik göster
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Fiyat (TL)',
+                        data: [],
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+            {% endif %}
+        });
+    </script>
+</body>
+</html> 

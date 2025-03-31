@@ -1,0 +1,60 @@
+2025-03-31 08:27:13,716 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:27:13,717 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:27:13,717 - apscheduler.scheduler - INFO - Added job "daily_report_job" to job store "default"
+2025-03-31 08:27:13,717 - apscheduler.scheduler - INFO - Added job "collect_phone_data" to job store "default"
+2025-03-31 08:27:13,717 - apscheduler.scheduler - INFO - Scheduler started
+2025-03-31 08:27:13,717 - __main__ - INFO - Zamanlanmış görevler ayarlandı
+2025-03-31 08:28:01,872 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:28:01,873 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:28:01,873 - apscheduler.scheduler - INFO - Added job "daily_report_job" to job store "default"
+2025-03-31 08:28:01,873 - apscheduler.scheduler - INFO - Added job "collect_phone_data" to job store "default"
+2025-03-31 08:28:01,873 - apscheduler.scheduler - INFO - Scheduler started
+2025-03-31 08:28:01,873 - __main__ - INFO - Zamanlanmış görevler ayarlandı
+2025-03-31 08:28:01,932 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.19:8080
+2025-03-31 08:28:01,932 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 08:28:01,933 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 08:28:02,435 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:28:02,435 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:28:02,435 - apscheduler.scheduler - INFO - Added job "daily_report_job" to job store "default"
+2025-03-31 08:28:02,435 - apscheduler.scheduler - INFO - Added job "collect_phone_data" to job store "default"
+2025-03-31 08:28:02,435 - apscheduler.scheduler - INFO - Scheduler started
+2025-03-31 08:28:02,435 - __main__ - INFO - Zamanlanmış görevler ayarlandı
+2025-03-31 08:28:02,451 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 08:28:02,461 - werkzeug - INFO -  * Debugger PIN: 116-120-398
+2025-03-31 08:43:12,587 - __main__ - INFO - Telefon verilerini toplama başladı
+2025-03-31 08:43:12,587 - __main__ - INFO - MediaMarkt için veri toplama başladı
+2025-03-31 08:43:12,587 - scraper.mediamarkt - INFO - Telefonlar getiriliyor: https://www.mediamarkt.com.tr/tr/category/akilli-telefonlar-452?page=1
+2025-03-31 08:43:15,208 - scraper.mediamarkt - ERROR - URL çekilirken hata oluştu https://www.mediamarkt.com.tr/tr/category/akilli-telefonlar-452?page=1: 404 Client Error: Not Found for url: https://www.mediamarkt.com.tr/tr/category/akilli-telefonlar-452?page=1
+2025-03-31 08:43:15,209 - scraper.mediamarkt - INFO - Toplam 0 telefon bulundu
+2025-03-31 08:43:15,209 - __main__ - INFO - MediaMarkt için 0 telefon bulundu
+2025-03-31 08:43:15,209 - __main__ - ERROR - Telefon verisi toplanamadı
+2025-03-31 08:43:15,217 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:43:15,218 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:43:15,218 - apscheduler.scheduler - INFO - Added job "daily_report_job" to job store "default"
+2025-03-31 08:43:15,218 - apscheduler.scheduler - INFO - Added job "collect_phone_data" to job store "default"
+2025-03-31 08:43:15,218 - apscheduler.scheduler - INFO - Scheduler started
+2025-03-31 08:43:15,218 - __main__ - INFO - Zamanlanmış görevler ayarlandı
+2025-03-31 08:43:15,277 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.19:8080
+2025-03-31 08:43:15,277 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-31 08:43:15,278 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 08:43:15,742 - __main__ - INFO - Telefon verilerini toplama başladı
+2025-03-31 08:43:15,742 - __main__ - INFO - MediaMarkt için veri toplama başladı
+2025-03-31 08:43:15,742 - scraper.mediamarkt - INFO - Telefonlar getiriliyor: https://www.mediamarkt.com.tr/tr/category/akilli-telefonlar-452?page=1
+2025-03-31 08:43:16,255 - scraper.mediamarkt - ERROR - URL çekilirken hata oluştu https://www.mediamarkt.com.tr/tr/category/akilli-telefonlar-452?page=1: 404 Client Error: Not Found for url: https://www.mediamarkt.com.tr/tr/category/akilli-telefonlar-452?page=1
+2025-03-31 08:43:16,255 - scraper.mediamarkt - INFO - Toplam 0 telefon bulundu
+2025-03-31 08:43:16,255 - __main__ - INFO - MediaMarkt için 0 telefon bulundu
+2025-03-31 08:43:16,255 - __main__ - ERROR - Telefon verisi toplanamadı
+2025-03-31 08:43:16,261 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:43:16,261 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-03-31 08:43:16,262 - apscheduler.scheduler - INFO - Added job "daily_report_job" to job store "default"
+2025-03-31 08:43:16,262 - apscheduler.scheduler - INFO - Added job "collect_phone_data" to job store "default"
+2025-03-31 08:43:16,262 - apscheduler.scheduler - INFO - Scheduler started
+2025-03-31 08:43:16,262 - __main__ - INFO - Zamanlanmış görevler ayarlandı
+2025-03-31 08:43:16,283 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 08:43:16,296 - werkzeug - INFO -  * Debugger PIN: 116-120-398
